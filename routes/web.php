@@ -13,17 +13,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 \Illuminate\Support\Facades\Auth::loginUsingId(1);
-Route::get('/', function () {
-    return view('main');
-});
+Route::get('/',[\App\Http\Controllers\productController::class,'index'])->name('main');
 
-Route::get('/products', function () {
-    return view('products');
-});
+Route::get('/shop', [\App\Http\Controllers\productController::class,'shop']);
 
-Route::get('/product', function () {
-    return view('single');
-});
+Route::get('shop/{product:slug}', [\App\Http\Controllers\productController::class,'show'])->name('single');
 
 Route::get('/cart', function () {
     return view('cart');

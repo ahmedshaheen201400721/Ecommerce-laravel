@@ -5,6 +5,7 @@ module.exports = {
 
     theme: {
         extend: {
+
             fontFamily: {
                 sans: ['Nunito', ...defaultTheme.fontFamily.sans],
             },
@@ -14,6 +15,9 @@ module.exports = {
     variants: {
         extend: {
             opacity: ['disabled'],
+            borderWidth: ['first','last'],
+            borderColor: ['first','last'],
+
         },
     },
 

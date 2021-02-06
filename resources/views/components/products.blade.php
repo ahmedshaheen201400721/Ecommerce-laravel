@@ -10,18 +10,18 @@
 
 
 <div class="grid md:grid-cols-3 grid-cols-1 gap-4 w-3/4 mx-auto mt-12 border p-4 ">
-    @for($i=0;$i<=8;$i++)
+    @foreach($products as $product)
 
         <div class="card1 rounded-lg overflow-hidden m-4 ">
-
+            <a href="{{$product->slug}}">
             <div class="bg-gray-900 relative pb-2/3 bg-blue-400" style="padding-bottom: 66%">
-                <img class="h-full w-full ri shadow hover:shadow-2xl absolute  object-cover object-center" src="{{asset('storage/product.jpg')}}" alt="">
+                <img class="h-full w-full ri shadow hover:shadow-2xl absolute  object-cover object-center" src="{{asset('storage/'.$product->slug.'.jpg')}}" alt="">
             </div>
-
+            </a>
             <div class="px-4 -mt-8 relative z-30 ">
                 <div class=" p-2 bg-white space-y-2 shadow-lg bg-white rounded-lg">
-                    <div class="capitalize font-bold  text-gray-900 ">you can buy from anywhere</div>
-                    <div class="capitalize font-bold   text-blue-600">Take advantage of it</div>
+                    <div class="capitalize font-bold text-3xl text-gray-900 ">{{$product->pricing()}}</div>
+                    <div class="capitalize font-bold   text-blue-600">{{$product->name}}</div>
                     <p class="text-gray-600 truncate hover:whitespace-normal hover:overflow-ellipsis ">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Beatae blanditiis delectus dignissimos explicabo inventore itaque optio qui recusandae. Doloribus, temporibus.</p>
                     <div>
                         <a href="" class="inline-block py-4 px-6 mt-4 rounded-full bg-blue-400 text-white capitalize font-bold hover:bg-blue-300"> book your laptop </a>
@@ -31,5 +31,5 @@
 
         </div>
 
-    @endfor
+    @endforeach
 </div>
