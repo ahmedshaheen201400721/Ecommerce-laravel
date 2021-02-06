@@ -13,7 +13,7 @@
     @foreach($products as $product)
 
         <div class="card1 rounded-lg overflow-hidden m-4 ">
-            <a href="{{$product->slug}}">
+            <a href="{{route('shop.product',$product->slug)}}">
             <div class="bg-gray-900 relative pb-2/3 bg-blue-400" style="padding-bottom: 66%">
                 <img class="h-full w-full ri shadow hover:shadow-2xl absolute  object-cover object-center" src="{{asset('storage/'.$product->slug.'.jpg')}}" alt="">
             </div>
@@ -24,7 +24,7 @@
                     <div class="capitalize font-bold   text-blue-600">{{$product->name}}</div>
                     <p class="text-gray-600 truncate hover:whitespace-normal hover:overflow-ellipsis ">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Beatae blanditiis delectus dignissimos explicabo inventore itaque optio qui recusandae. Doloribus, temporibus.</p>
                     <div>
-                        <a href="" class="inline-block py-4 px-6 mt-4 rounded-full bg-blue-400 text-white capitalize font-bold hover:bg-blue-300"> book your laptop </a>
+                        <a href="{{route('shop.product',$product->slug)}}" class="inline-block py-2 px-4 mt-4 rounded-full bg-blue-400 text-white capitalize font-bold hover:bg-blue-300"> book your laptop </a>
                     </div>
                 </div>
             </div>

@@ -15,13 +15,25 @@ use Illuminate\Support\Facades\Route;
 \Illuminate\Support\Facades\Auth::loginUsingId(1);
 Route::get('/',[\App\Http\Controllers\productController::class,'index'])->name('main');
 
-Route::get('/shop', [\App\Http\Controllers\productController::class,'shop']);
 
-Route::get('shop/{product:slug}', [\App\Http\Controllers\productController::class,'show'])->name('single');
+Route::get('/shop', [\App\Http\Controllers\productController::class,'shop'])->name('shop.index');
+Route::get('shop/{product:slug}', [\App\Http\Controllers\productController::class,'show'])->name('shop.product');
 
-Route::get('/cart', function () {
-    return view('cart');
+
+Route::get('/cart', [\App\Http\Controllers\cartController::class,'index'])->name('cart.index');
+Route::post('/cart', [\App\Http\Controllers\cartController::class,'store'])->name('cart.store');
+Route::delete('/cart/{id}', [\App\Http\Controllers\cartController::class,'destroy'])->name('cart.destroy');
+Route::post('saved/cart/{id}', [\App\Http\Controllers\cartController::class,'switchToSaved'])->name('cart.switch');
+Route::post('back/cart/{id}', [\App\Http\Controllers\cartController::class,'back'])->name('cart.back');
+Route::delete('back/cart/{id}', [\App\Http\Controllers\cartController::class,'destroySaved'])->name('cart.destroySaved');
+
+
+Route::get('/empty',function (){
+    \Gloudemans\Shoppingcart\Facades\Cart::destroy();
+    \Gloudemans\Shoppingcart\Facades\Cart::instance('saveForLater')->destroy();
+    return \Gloudemans\Shoppingcart\Facades\Cart::content();
 });
+
 
 Route::get('/thanks', function () {
     return view('thank');

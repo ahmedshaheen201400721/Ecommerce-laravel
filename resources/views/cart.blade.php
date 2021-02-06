@@ -10,5 +10,5 @@
 @endsection
 
 @section('content2')
-    @include('components.single')
+    @include('components.cart')
 @endsection

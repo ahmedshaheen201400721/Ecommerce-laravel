@@ -14,7 +14,7 @@ class productController extends Controller
      */
     public function index()
     {
-        $products=Product::inRandomOrder()->get();
+        $products=Product::relatedproducts(9)->get();
         return view('main',['products'=>$products]);
     }
     /**
@@ -38,7 +38,7 @@ class productController extends Controller
      */
     public function shop()
     {
-        $products=Product::inRandomOrder()->take(6)->get();
+        $products=Product::relatedproducts(6)->get();
         return view('products',['products'=>$products]);
 
     }

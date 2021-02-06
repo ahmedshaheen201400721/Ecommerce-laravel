@@ -1,29 +1,23 @@
-<div class="w-3/4 mx-auto mt-12">
-    <div class="font-bold text-2xl mb-6"> 3 items in shopping cart</div>
-
-    @foreach(range(1,4) as $product)
-    <div class="flex h-24 justify-center items-center border-t border-black mt-4 last:border-b ">
-        <div class="w-3/12"><img class="h-20" src="{{asset('storage/product.jpeg')}}" alt=""></div>
-        <div class="w-5/12">
-            <div class="font-bold ">mac book</div>
-            <div class="text-gray-600">16 inch, 1TB, core i3</div>
-        </div>
-
-        <div class="w-2/12">
-            <a href="">remove</a><br>
-            <a href="">save for later</a>
-        </div>
-        <div class="w-2/12">$188</div>
+<div class="flex w-3/4 mx-auto mt-12">
+    <div class="w-1/2">
+        <img class="" src="{{asset('storage/'.$product->slug.'.jpg')}}" alt="">
     </div>
-    @endforeach
 
-
-</div>
-
-<div class=" w-3/4 mx-auto mb-6 mt-12">
-    <div class="font-bold text-6xl">similiar product</div>
-
-
+    <div class="w-1/2 ml-8 ">
+        <div class="text-3xl font-bold mb-2">{{$product->name}}</div>
+        <div class="text-gray-600 mb-2">{{$product->details}}</div>
+        <div class="text-3xl font-bold mb-6">{{$product->pricing()}}</div>
+        <div>{{$product->description}}</div>
+        <div>
+            <form action="{{route('cart.store')}}" method="post" class="inline cursor-pointer">
+                @csrf
+                <input class="hidden" value="{{$product->id}}" name="id"></input>
+                <input class="hidden" value="{{$product->name}}" name="name"></input>
+                <input class="hidden" value="{{$product->price}}" name="price"></input>
+                <input class="inline-block py-3 px-4 cursor-pointer mt-4 outline-none rounded-full bg-blue-400 text-white capitalize font-bold hover:bg-blue-300" value="add to cart" type="submit"></input>
+            </form>
+        </div>
 
     </div>
 </div>
+@include('components.relatedproducts')
