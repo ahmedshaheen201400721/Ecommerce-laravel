@@ -1,5 +1,5 @@
 @extends('layouts.products')
-@include('layouts.nav')
+@include('components.nav')
 @section('content1')
     <div class="p-4 bg-gray-200 text-gray-900 ">
         Home

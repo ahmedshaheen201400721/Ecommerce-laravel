@@ -1,5 +1,5 @@
 @extends('layouts.products')
-@include('layouts.nav')
+@include('components.nav')
 @section('content1')
     @include('components.sperator')
 @endsection

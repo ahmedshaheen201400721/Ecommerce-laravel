@@ -1,5 +1,5 @@
 @extends('layouts.products')
-@include('layouts.nav')
+@include('components.nav')
 @section('content1')
 <div class="h-screen flex justify-center items-center">
     <div class="text-black text-center">

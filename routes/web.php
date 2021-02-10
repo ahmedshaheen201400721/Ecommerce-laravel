@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 \Illuminate\Support\Facades\Auth::loginUsingId(1);
+
 Route::get('/',[\App\Http\Controllers\productController::class,'index'])->name('main');
 
 

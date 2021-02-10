@@ -15,7 +15,7 @@ class productController extends Controller
     public function index()
     {
         $products=Product::relatedproducts(9)->get();
-        return view('main',['products'=>$products]);
+        return view('pages.index',['products'=>$products]);
     }
     /**
      * Display the specified resource.
@@ -27,7 +27,7 @@ class productController extends Controller
 
     {
         $products=Product::where('slug','!=',$product->slug)->inRandomOrder()->take(4)->get();
-        return view('single',['product'=>$product,'products'=>$products]);
+        return view('pages.single',['product'=>$product,'products'=>$products]);
     }
 
     /**
@@ -39,7 +39,7 @@ class productController extends Controller
     public function shop()
     {
         $products=Product::relatedproducts(6)->get();
-        return view('products',['products'=>$products]);
+        return view('pages.shop',['products'=>$products]);
 
     }
 
