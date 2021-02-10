@@ -45,7 +45,7 @@
 @include('components.invoice')
     <div class="mt-12 flex justify-between w-1/2 mx-auto">
         <div><a href="{{route('shop.index')}}" class="px-6 py-3 border font-bold">back to shopping</a></div>
-        <div><a href="{{route('shop.index')}}" class="px-6 py-3 bg-green-500 text-white">proceed to checkout</a></div>
+        <div><a href="{{route('charge.index')}}" class="px-6 py-3 bg-green-500 text-white">proceed to checkout</a></div>
     </div>
 </div>
 

@@ -29,6 +29,9 @@ Route::post('back/cart/{id}', [\App\Http\Controllers\cartController::class,'back
 Route::delete('back/cart/{id}', [\App\Http\Controllers\cartController::class,'destroySaved'])->name('cart.destroySaved');
 
 
+Route::get('/charage', [\App\Http\Controllers\charageController::class,'index'])->name('charge.index');
+Route::post('/charage', [\App\Http\Controllers\charageController::class,'store'])->name('charge.post');
+
 Route::get('/empty',function (){
     \Gloudemans\Shoppingcart\Facades\Cart::destroy();
     \Gloudemans\Shoppingcart\Facades\Cart::instance('saveForLater')->destroy();
@@ -36,11 +39,14 @@ Route::get('/empty',function (){
 });
 
 
+
 Route::get('/thanks', function () {
-    return view('thank');
-});
+    return view('pages.thank');
+})->name('thanks');
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
+
+
 
 require __DIR__.'/auth.php';
