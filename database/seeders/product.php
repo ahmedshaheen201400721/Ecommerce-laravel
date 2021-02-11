@@ -13,77 +13,63 @@ class product extends Seeder
      */
     public function run()
     {
+        foreach(range(1,30) as $i)
         \App\Models\Product::forceCreate([
-            'name'=>'laptop1',
-            'slug'=>'product-1',
-            'price'=>2099,
-            'details'=>'16 inch, 1TB, core i3',
+            'name'=>'laptop'.$i,
+            'slug'=>'labtop-'.$i,
+            'price'=>[2099,44,3222,1244,6789,12345,2002,2000,123467][array_rand([2099,44,3222,1244,6789,12345,2002,2000,12346*1007])]*100,
+            'details'=>[13,14,16][array_rand([13,14,16])]."inch, ".[1,2,3][array_rand([1,2,3])]."TB, core i3",
             'description'=>"A laptop or laptop computer, is a small, portable personal computer (PC) with a  form factor, typically having a thin LCD or LED computer screen mounted on the inside of the upper lid of the clamshell and an alphanumeric keyboard on the inside of the lower lid.",
-        ]);
+        ])->categories()->attach(1);
 
+        foreach(range(1,30) as $i)
         \App\Models\Product::forceCreate([
-            'name'=>'laptop2',
-            'slug'=>'product-2',
-            'price'=>2299,
-            'details'=>'16 inch, 1TB, core i3, 4G Ram',
-            'description'=>"A laptop or laptop computer, is a small, portable personal computer (PC) with a  form factor, typically having a thin LCD or LED computer screen mounted on the inside of the upper lid of the clamshell and an alphanumeric keyboard on the inside of the lower lid.",
-        ]);
+            'name'=>'desktop'.$i,
+            'slug'=>'desktop-'.$i,
+            'price'=>[2099,44,3222,1244,6789,12345,2002,2000,123467][array_rand([2099,44,3222,1244,6789,12345,2002,2000,12346*1007])]*100,
+            'details'=>[22,23,25][array_rand([22,23,25])]."inch, ".[1,2,3][array_rand([1,2,3])]."TB, core i5",
+            'description'=>"A desktop or desktop computer, is a small, portable personal computer (PC) with a  form factor, typically having a thin LCD or LED computer screen mounted on the inside of the upper lid of the clamshell and an alphanumeric keyboard on the inside of the lower lid.",
+        ])->categories()->attach(2);
 
-        \App\Models\Product::forceCreate([
-            'name'=>'laptop3',
-            'slug'=>'product-3',
-            'price'=>20399,
-            'details'=>'16 inch, 1TB, core i3, 4G Ram',
-            'description'=>"A laptop or laptop computer, is a small, portable personal computer (PC) with a  form factor, typically having a thin LCD or LED computer screen mounted on the inside of the upper lid of the clamshell and an alphanumeric keyboard on the inside of the lower lid.",
-        ]);
-        \App\Models\Product::forceCreate([
-            'name'=>'laptop4',
-            'slug'=>'product-4',
-            'price'=>20499,
-            'details'=>'16 inch, 1TB, core i3, 4G Ram',
-            'description'=>"A laptop or laptop computer, is a small, portable personal computer (PC) with a  form factor, typically having a thin LCD or LED computer screen mounted on the inside of the upper lid of the clamshell and an alphanumeric keyboard on the inside of the lower lid.",
-        ]);
-        \App\Models\Product::forceCreate([
-            'name'=>'laptop5',
-            'slug'=>'product-5',
-            'price'=>20599,
-            'details'=>'16 inch, 1TB, core i3, 4G Ram',
-            'description'=>"A laptop or laptop computer, is a small, portable personal computer (PC) with a  form factor, typically having a thin LCD or LED computer screen mounted on the inside of the upper lid of the clamshell and an alphanumeric keyboard on the inside of the lower lid.",
-        ]);
-        \App\Models\Product::forceCreate([
-            'name'=>'laptop6',
-            'slug'=>'product-6',
-            'price'=>20699,
-            'details'=>'16 inch, 1TB, core i3, 4G Ram',
-            'description'=>"A laptop or laptop computer, is a small, portable personal computer (PC) with a  form factor, typically having a thin LCD or LED computer screen mounted on the inside of the upper lid of the clamshell and an alphanumeric keyboard on the inside of the lower lid.",
-        ]);
-        \App\Models\Product::forceCreate([
-            'name'=>'laptop7',
-            'slug'=>'product-7',
-            'price'=>27099,
-            'details'=>'16 inch, 1TB, core i3, 4G Ram',
-            'description'=>"A laptop or laptop computer, is a small, portable personal computer (PC) with a  form factor, typically having a thin LCD or LED computer screen mounted on the inside of the upper lid of the clamshell and an alphanumeric keyboard on the inside of the lower lid.",
-        ]);
-        \App\Models\Product::forceCreate([
-            'name'=>'laptop8',
-            'slug'=>'product-8',
-            'price'=>82099,
-            'details'=>'16 inch, 1TB, core i3, 4G Ram',
-            'description'=>"A laptop or laptop computer, is a small, portable personal computer (PC) with a  form factor, typically having a thin LCD or LED computer screen mounted on the inside of the upper lid of the clamshell and an alphanumeric keyboard on the inside of the lower lid.",
-        ]);
-        \App\Models\Product::forceCreate([
-            'name'=>'laptop9',
-            'slug'=>'product-9',
-            'price'=>29099,
-            'details'=>'16 inch, 1TB, core i3, 4G Ram',
-            'description'=>"A laptop or laptop computer, is a small, portable personal computer (PC) with a  form factor, typically having a thin LCD or LED computer screen mounted on the inside of the upper lid of the clamshell and an alphanumeric keyboard on the inside of the lower lid.",
-        ]);
-        \App\Models\Product::forceCreate([
-            'name'=>'laptop10',
-            'slug'=>'product-10',
-            'price'=>92099,
-            'details'=>'16 inch, 1TB, core i3, 4G Ram',
-            'description'=>"A laptop or laptop computer, is a small, portable personal computer (PC) with a  form factor, typically having a thin LCD or LED computer screen mounted on the inside of the upper lid of the clamshell and an alphanumeric keyboard on the inside of the lower lid.",
-        ]);
+        foreach(range(1,30) as $i)
+            \App\Models\Product::forceCreate([
+                'name'=>'mobile'.$i,
+                'slug'=>'mobile-'.$i,
+                'price'=>[2099,44,3222,1244,6789,12345,2002,2000,123467][array_rand([2099,44,3222,1244,6789,12345,2002,2000,123467])]*100,
+                'details'=>[3,5,7][array_rand([3,5,7])]."inch, ".[100,200,300][array_rand([100,200,300])]."Giga, core i5",
+                'description'=>"A mobile or mobile computer, is a small, portable personal computer (PC) with a  form factor, typically having a thin LCD or LED computer screen mounted on the inside of the upper lid of the clamshell and an alphanumeric keyboard on the inside of the lower lid.",
+            ])->categories()->attach(3);
+        foreach(range(1,30) as $i)
+            \App\Models\Product::forceCreate([
+                'name'=>'tablet'.$i,
+                'slug'=>'tablet-'.$i,
+                'price'=>[2099,44,3222,1244,6789,12345,2002,2000,123467][array_rand([2099,44,3222,1244,6789,12345,2002,2000,123467])]*100,
+                'details'=>[9,12,14][array_rand([9,12,14])]."inch, ".[100,200,300][array_rand([100,200,300])]."Giga, core i5",
+                'description'=>"A tablet or tablet computer, is a small, portable personal computer (PC) with a  form factor, typically having a thin LCD or LED computer screen mounted on the inside of the upper lid of the clamshell and an alphanumeric keyboard on the inside of the lower lid.",
+            ])->categories()->attach(4);
+        foreach(range(1,30) as $i)
+            \App\Models\Product::forceCreate([
+                'name'=>'tv'.$i,
+                'slug'=>'tv-'.$i,
+                'price'=>[2099,4444,3222,1244,6789,12345,2002,2000,123467][array_rand([2099,44,3222,1244,6789,12345,2002,2000,123467])]*100,
+                'details'=>[20,50,70][array_rand([20,50,70])]."inch, ".[100,200,300][array_rand([100,200,300])]."Giga, core i5",
+                'description'=>"A tv or tv computer, is a small, portable personal computer (PC) with a  form factor, typically having a thin LCD or LED computer screen mounted on the inside of the upper lid of the clamshell and an alphanumeric keyboard on the inside of the lower lid.",
+            ])->categories()->attach(5);
+        foreach(range(1,30) as $i)
+            \App\Models\Product::forceCreate([
+                'name'=>'camera'.$i,
+                'slug'=>'camera-'.$i,
+                'price'=>[2099,4444,3222,1244,6789,12345,2002,2000,123467][array_rand([2099,44,3222,1244,6789,12345,2002,2000,123467])]*100,
+                'details'=>[1,2,4][array_rand([1,2,4])]."inch, ".[100,200,300][array_rand([100,200,300])]."Giga, core i5 and lense ",
+                'description'=>"A camera or camera computer, is a small, portable personal computer (PC) with a  form factor, typically having a thin LCD or LED computer screen mounted on the inside of the upper lid of the clamshell and an alphanumeric keyboard on the inside of the lower lid.",
+            ])->categories()->attach(6);
+        foreach(range(1,30) as $i)
+            \App\Models\Product::forceCreate([
+                'name'=>'appliance'.$i,
+                'slug'=>'appliance-'.$i,
+                'price'=>[2099,4444,3222,1244,6789,12345,2002,2000,123467][array_rand([2099,44,3222,1244,6789,12345,2002,2000,123467])]*100,
+                'details'=>[1,2,4][array_rand([1,2,4])]."inch, ".[100,200,300][array_rand([100,200,300])]."Giga, core i5 and lense ",
+                'description'=>"A appliance or appliance computer, is a small, portable personal computer (PC) with a  form factor, typically having a thin LCD or LED computer screen mounted on the inside of the upper lid of the clamshell and an alphanumeric keyboard on the inside of the lower lid.",
+            ])->categories()->attach(7);
     }
 }

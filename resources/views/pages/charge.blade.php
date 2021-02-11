@@ -35,7 +35,7 @@
                     <div class="font-bold text-2xl mb-4">Your Order</div>
                     @foreach($cartProducts as $product)
                         <div class="flex my-2 border-t border-gray-900 py-2">
-                            <div class="w-2/12 flex items-center"><img class="h-15" src="{{asset('storage/'.$product->model->slug.'.jpg')}}" alt=""></div>
+                            <div class="w-2/12 flex items-center"><img class="h-15" src="{{image($product->model->slug)}}" alt=""></div>
                             <div class="w-8/12 text-center">
                                 <p>{{$product->name}}</p>
                                 <p>{{$product->model->details}}</p>
@@ -46,22 +46,56 @@
                             </div>
                         </div>
                     @endforeach
+
                     <div class="border-b border-t py-2  my-2 border-green-900 ">
                         <div class="w-3/4">
+                            @if(session()->has('subtotal'))
+                            <div class="text-3xl font-bold">after coupon</div>
+                            @endif
                             <div class="flex justify-between ">
-                                <div>subtotal</div>
-                                <div>{{\Gloudemans\Shoppingcart\Facades\Cart::subtotal()}}</div>
+                                <div class="font-semibold">subtotal</div>
+                                <div>{{pricing($subtotal)}}</div>
                             </div>
-
+                                @if(session()->has('discount'))
+                                    <div class="flex justify-between ">
+                                        <div class="font-semibold">
+                                            discount (code:{{session('code')}})
+                                            <form action="{{route('coupon.destroy')}}" method="post" class="inline">
+                                                @csrf
+                                                @method('delete')
+                                                <input type="submit" value="remove" class="text-blue-400 hover:text-blue-800 hover:underline cursor-pointer bg-white">
+                                            </form>
+                                        </div>
+                                        <div>{{pricing(session('discount'))}}</div>
+                                    </div>                                @endif
                             <div class="flex justify-between">
-                                <div>tax</div>
-                                <div>{{\Gloudemans\Shoppingcart\Facades\Cart::tax()}}</div>
+                                <div class="font-semibold">tax</div>
+                                <div>{{pricing($tax)}}</div>
                             </div>
 
                             <div class="flex justify-between border-t border-gray-900">
-                                <div>total</div>
-                                <div>{{\Gloudemans\Shoppingcart\Facades\Cart::total()}}</div>
+                                <div class="font-semibold">total</div>
+                                <div>{{pricing($total)}}</div>
                             </div>
+                        </div>
+                    </div>
+                    <div>
+                        <div>
+                            @error('code')
+                            <div class="px-8 py-3 bg-red-100 text-red-900">{{ $message }}</div>
+                            @enderror
+                            @if(session()->has('success'))
+                            <div class="px-8 py-3 bg-green-100 text-green-900">{{session('success')}}</div>
+                            @endif
+                            @unless(session()->has('subtotal'))
+                                <div class="text-3xl font-bold mt-4">having a Coupon</div>
+                                <form action="{{route('coupon.store')}}" method="post" class="border p-4 border-green-800">
+                                <input type="text" name="code"  class="rounded-lg" value="{{ old('title') }}">
+                                @csrf
+                                <input type="submit" value="apply" class="px-4 py-2 p-3">
+
+                            </form>
+                            @endunless
                         </div>
                     </div>
                 </div>

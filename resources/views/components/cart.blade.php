@@ -4,15 +4,30 @@
         {{session('msg')}}
     </div>
     @endif
+       @if(session()->has('error'))
+           <div class="px-6 py-3 bg-red-200 text-red-900  my-4 font-bold rounded-lg" >
+               {{session('error')}}
+           </div>
+       @endif
     <div class="font-bold text-2xl mb-6"> {{$cartProducts->count()}} item(s) in shopping cart</div>
 
 
     @forelse($cartProducts  as $product)
         <div class="flex h-24 justify-center items-center border-t border-black mt-4 last:border-b ">
-            <div class="w-3/12"><img class="h-20" src="{{asset('storage/'.$product->model->slug.'.jpg')}}" alt=""></div>
-            <div class="w-5/12">
+            <div class="w-3/12"><img class="h-20" src="{{image($product->model->slug)}}" alt=""></div>
+            <div class="w-3/12">
                 <div class="font-bold ">{{$product->name}}</div>
                 <div class="text-gray-600">{{$product->model->details}}</div>
+            </div>
+            <div class="w-2/12">
+                <form action="">
+                    <label for="{{$product->rowId}}"> quantity</label>
+                    <select name="select-{{$product->name}}" id="{{$product->rowId}}" class="select">
+                        @foreach(range(1,7) as $count)
+                            <option value="{{$count}}"  @if($count==$product->qty) selected @endif>{{$count}}</option>
+                        @endforeach
+                    </select>
+                </form>
             </div>
 
             <div class="w-3/12">
@@ -49,5 +64,20 @@
     </div>
 </div>
 
+<script>
+   var selects=document.getElementsByClassName('select')
+    Array.from(selects).forEach(function(el){
+        el.addEventListener('change',function(){
+
+            axios.patch('/cart',{'value':el.value,'id':el.id}).then(function (response) {
+                if(response.data.success){
+                            location.reload()
+                        }
+                }).catch(function (error) {
+                location.reload()
+            });
+        })
+    })
+</script>
 @include('components.saveForLater')
 @include('components.relatedproducts')

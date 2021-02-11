@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\chargeRequest;
+use App\Models\Coupon;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Http\Request;
 
@@ -15,19 +17,12 @@ class charageController extends Controller
     public function index()
     {
         $cartProducts=Cart::instance('default')->content();
-//        dd($cartProducts);
-        return view('pages.charge',compact('cartProducts'));
+        $invoice=$this->invoice();
+        $invoice=array_merge($invoice,['cartProducts'=>$cartProducts]);
+        return view('pages.charge',$invoice);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
+
 
     /**
      * Store a newly created resource in storage.
@@ -35,57 +30,32 @@ class charageController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(chargeRequest $request)
     {
         $stripeCharge = $request->user()->charge(
-            Cart::total()*100, $request->paymentMethodId
+            total( $this->invoice()['total']), $request->paymentMethodId
         );
         isset($stripeCharge)?Cart::destroy():'';
+        Coupon::where('code',session('code'))->delete();
+        session()->forget(['code','discount','subtotal']);
+
         return redirect(route('thanks'));
     }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
+   private function invoice()
     {
-        //
-    }
+        if(session()->has('subtotal')){
+//            dd(session()->all());
+            $subtotal=session('subtotal');
+            $tax=$subtotal*21/100;
+            $total=$subtotal+$tax;
+            $total=round($total,2);
+            return compact('subtotal','tax','total');
+        }else{
+            $subtotal=Cart::subtotal();
+            $tax=Cart::tax();
+            $total=Cart::total();
+            return compact('subtotal','tax','total');
+        }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
     }
 }

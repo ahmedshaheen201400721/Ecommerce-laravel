@@ -5,17 +5,17 @@
     <div class="w-1/2 text-center">
         <div class="flex justify-between text-xl">
             <div class="ml-32">subtotal</div>
-            <div>{{\Gloudemans\Shoppingcart\Facades\Cart::subtotal()}}</div>
+            <div>{{pricing(\Gloudemans\Shoppingcart\Facades\Cart::subtotal())}}</div>
         </div>
 
         <div class="flex justify-between text-xl">
-            <div class="ml-32">tax</div>
-            <div>{{\Gloudemans\Shoppingcart\Facades\Cart::tax()}}</div>
+            <div class="ml-32">tax(21%)</div>
+            <div>{{pricing(\Gloudemans\Shoppingcart\Facades\Cart::tax())}}</div>
         </div>
 
         <div class="flex justify-between font-bold text-2xl">
             <div class="ml-32">total</div>
-            <div>{{\Gloudemans\Shoppingcart\Facades\Cart::total()}}</div>
+            <div>{{pricing(\Gloudemans\Shoppingcart\Facades\Cart::total())}}</div>
         </div>
     </div>
 </div>

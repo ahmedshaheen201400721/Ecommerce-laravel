@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Product;
+use App\support\filters\ProductFilter;
 use Illuminate\Http\Request;
 
 class productController extends Controller
@@ -14,7 +16,8 @@ class productController extends Controller
      */
     public function index()
     {
-        $products=Product::relatedproducts(9)->get();
+
+        $products=Product::relatedproducts(12)->get();
         return view('pages.index',['products'=>$products]);
     }
     /**
@@ -36,10 +39,18 @@ class productController extends Controller
      * @param  \App\Models\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function shop()
+    public function shop(ProductFilter $filter)
     {
-        $products=Product::relatedproducts(6)->get();
-        return view('pages.shop',['products'=>$products]);
+        $categories=Category::get();
+        if(\request()->has('category') or \request()->has('order')){
+            $products=Product::filters($filter)->paginate(9);
+            $products->withPath(route('shop.index',['category'=>\request()->category,'order'=>\request()->order]));
+            return view('pages.shop',['products'=>$products,'categories'=>$categories,'name'=>\request()->category]);
+        }
+        else{
+            $products=Product::inRandomOrder()->paginate(9);
+            return view('pages.shop',['products'=>$products,'categories'=>$categories]);
+        }
 
     }
 

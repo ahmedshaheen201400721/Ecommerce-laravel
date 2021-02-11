@@ -1,6 +1,6 @@
 <div class="flex w-3/4 mx-auto mt-12">
     <div class="w-1/2">
-        <img class="" src="{{asset('storage/'.$product->slug.'.jpg')}}" alt="">
+        <img class="" src="{{image($product->slug)}}" alt="">
     </div>
 
     <div class="w-1/2 ml-8 ">

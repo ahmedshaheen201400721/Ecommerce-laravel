@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\support\filters\ProductFilter;
+use App\support\filters\QueryFilter;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -16,4 +18,12 @@ class Product extends Model
     public function scopeRelatedProducts($query,$n){
         return $query->inRandomOrder()->take($n);
     }
+    public function categories()
+    {
+        return $this->belongsToMany(Category::class)->withTimestamps();
+    }
+    public function scopefilters($query,QueryFilter $filter){
+          return  $filter->apply($query);
+    }
+
 }

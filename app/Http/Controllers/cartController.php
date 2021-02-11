@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Product;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class cartController extends Controller
 {
@@ -29,8 +30,9 @@ class cartController extends Controller
      */
     public function store(Request $request)
     {
-        $this->cartCheck($request,'default');
-
+        if(  $this->cartCheck($request,'default')){
+           return redirect(route('cart.index'))->with('msg','item already in your');
+        }
 
         Cart::instance('default')->add($request->id,$request->name,1,$request->price/100)->associate('App\Models\Product');
         return redirect(route('cart.index'))->with('msg','item added to cart successfully');
@@ -65,9 +67,18 @@ class cartController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        $validator=Validator::make($request->all(),['value'=>'required|integer|between:1,6']);
+        if($validator->fails()){
+            session()->flash('error','this qunaity is overpriced');
+            return response()->json(['success'=>true],500);
+        }
+
+        Cart::update($request->id,['qty'=>$request->value]);
+        session()->flash('msg','quantity was updated');
+        return ['success'=>true];
+
     }
 
     /**
@@ -120,7 +131,7 @@ class cartController extends Controller
         });
 
         if($duplicate->count()>0){
-            return redirect(route('cart.index'))->with('msg','item already in your');
+            return true;
         }
     }
 }

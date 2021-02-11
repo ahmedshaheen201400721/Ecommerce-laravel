@@ -2,12 +2,10 @@
     <div class="capitalize w-2/12">
         <div class="w-full">
             <div class="text-lg font-extrabold ">by category</div>
-            <div>computer</div>
-            <div>tvs</div>
-            <div>fans</div>
-            <div>headphones</div>
-            <div>Mobiles</div>
-            <div>Radios</div>
+            @foreach($categories as $category)
+            <div><a href="{{route('shop.index',['category'=>$category->slug])}}">{{$category->name}}</a></div>
+            @endforeach
+
         </div>
         <div>
             <div class="text-lg font-extrabold"> By price</div>
@@ -17,15 +15,31 @@
         </div>
     </div>
 
+<div class="w-10/12">
+    @isset($name)
+        <div class="flex items-baseline">
+            <div class="text-4xl font-bold mb-6 w-1/2">{{$name}}</div>
+            <div class="flex justify-around w-1/2 text-blue-400">
+                <a class="block hover:underline" href="{{route('shop.index',['category'=>$name,'order'=>'desc'])}}">most expensive</a>
+                <a class="block hover:underline" href="{{route('shop.index',['category'=>$name,'order'=>'asc'])}}">cheapest</a>
+            </div>
 
-    <div class="grid md:grid-cols-3 grid-cols-1 gap-4 mx-auto w-10/12 border p-4 ">
-            @foreach($products as $product)
+        </div>
+    @else
+        <div class="flex justify-around w-1/2 text-blue-400">
+            <a class="block hover:underline" href="{{route('shop.index',['category'=>request()->name,'order'=>'desc'])}}">most expensive</a>
+            <a class="block hover:underline" href="{{route('shop.index',['category'=>request()->name,'order'=>'asc'])}}">cheapest</a>
+        </div>
+    @endisset
+        <div class="grid md:grid-cols-3 grid-cols-1 gap-4 mx-auto  border p-4 ">
+
+            @forelse($products as $product)
 
                 <div class="card1 rounded-lg overflow-hidden m-4 ">
                     <a href="{{route('shop.product',$product->slug)}}">
-                    <div class="bg-gray-900 relative pb-2/3 bg-blue-400" style="padding-bottom: 66%">
-                        <img class="h-full w-full ri shadow hover:shadow-2xl absolute  object-cover object-center" src="{{asset('storage/'.$product->slug.'.jpg')}}" alt="">
-                    </div>
+                        <div class="bg-gray-900 relative pb-2/3 bg-blue-400" style="padding-bottom: 66%">
+                            <img class="h-full w-full ri shadow hover:shadow-2xl absolute  object-cover object-center" src="{{image($product->slug)}}" alt="">
+                        </div>
                     </a>
                     <div class="px-4 -mt-8 relative z-30 ">
                         <div class=" p-2 bg-white space-y-2 shadow-lg bg-white rounded-lg">
@@ -39,9 +53,14 @@
                     </div>
 
                 </div>
+            @empty
+                <div class="px-8 py-4 bg-gray-700 text-white text-3xl">no product found</div>
+            @endforelse
 
-            @endforeach
-    </div>
+        </div>
+    <div class="my-8 p-4"> {{$products->links()}}</div>
+
+</div>
 
 </div>
 
