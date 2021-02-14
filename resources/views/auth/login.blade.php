@@ -2,7 +2,8 @@
     <x-auth-card>
         <x-slot name="logo">
             <a href="/">
-                <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
+                <p class="fill-current text-gray-500 text-5xl">Ecommerce</p>
+{{--                <x-application-logo class="w-20 h-20 fill-current text-gray-500" />--}}
             </a>
         </x-slot>
 
@@ -46,7 +47,9 @@
                         {{ __('Forgot your password?') }}
                     </a>
                 @endif
-
+                    <a class="underline text-sm text-gray-600 mx-4 hover:text-gray-900" href="{{ route('register') }}">
+                        {{ __('Register') }}
+                    </a>
                 <x-button class="ml-3">
                     {{ __('Login') }}
                 </x-button>

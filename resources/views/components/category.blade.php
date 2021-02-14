@@ -38,7 +38,7 @@
                 <div class="card1 rounded-lg overflow-hidden m-4 ">
                     <a href="{{route('shop.product',$product->slug)}}">
                         <div class="bg-gray-900 relative pb-2/3 bg-blue-400" style="padding-bottom: 66%">
-                            <img class="h-full w-full ri shadow hover:shadow-2xl absolute  object-cover object-center" src="{{image($product->slug)}}" alt="">
+                            <img class="h-full w-full ri shadow hover:shadow-2xl absolute  object-cover object-center" src="{{asset($product->image)}}" alt="">
                         </div>
                     </a>
                     <div class="px-4 -mt-8 relative z-30 ">

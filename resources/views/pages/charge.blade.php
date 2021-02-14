@@ -1,5 +1,6 @@
 @extends('layouts.products')
-@include('components.nav')
+{{menu('header','components.nav')}}
+{{--@include('components.nav')--}}
 @section('content1')
     <div class="bg-white text-6xl  mt-6 mb-4 ">
      <p class="border-t-2 border-black text-black inline-block border-b-2"> checkout</p>
@@ -35,7 +36,7 @@
                     <div class="font-bold text-2xl mb-4">Your Order</div>
                     @foreach($cartProducts as $product)
                         <div class="flex my-2 border-t border-gray-900 py-2">
-                            <div class="w-2/12 flex items-center"><img class="h-15" src="{{image($product->model->slug)}}" alt=""></div>
+                            <div class="w-2/12 flex items-center"><img class="h-15" src="{{asset($product->model->image)}}" alt=""></div>
                             <div class="w-8/12 text-center">
                                 <p>{{$product->name}}</p>
                                 <p>{{$product->model->details}}</p>
@@ -105,7 +106,7 @@
         <script>
             var stripe = Stripe('pk_test_51IIWk8BnCqRQlFTDr9ls2wm0UOoCCLs6h7c0BfI16195FitQw1VG3SUzswZZqKOj5Bbfhppobc5K326HqMyjk13r00fPdwdp8Y')
             var elements = stripe.elements();
-            var form = document.querySelector('form');
+            var form = document.querySelector('#payment-form');
             var style = {
                 base: {
                     // Add your base input styles here. For example:

@@ -31,8 +31,8 @@ Route::post('back/cart/{id}', [\App\Http\Controllers\cartController::class,'back
 Route::delete('back/cart/{id}', [\App\Http\Controllers\cartController::class,'destroySaved'])->name('cart.destroySaved');
 
 
-Route::get('/charage', [\App\Http\Controllers\charageController::class,'index'])->name('charge.index');
-Route::post('/charage', [\App\Http\Controllers\charageController::class,'store'])->name('charge.post');
+Route::get('/charage', [\App\Http\Controllers\charageController::class,'index'])->name('charge.index')->middleware('auth');
+Route::post('/charage', [\App\Http\Controllers\charageController::class,'store'])->name('charge.post')->middleware('auth');
 
 
 Route::delete('/coupon', [\App\Http\Controllers\couponController::class,'destroy'])->name('coupon.destroy');
@@ -59,3 +59,8 @@ Route::get('/dashboard', function () {
 
 
 require __DIR__.'/auth.php';
+
+
+Route::group(['prefix' => 'admin'], function () {
+    Voyager::routes();
+});

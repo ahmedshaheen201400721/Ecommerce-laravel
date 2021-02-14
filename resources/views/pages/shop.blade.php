@@ -1,5 +1,5 @@
 @extends('layouts.products')
-@include('components.nav')
+{{menu('header','components.nav')}}
 @section('content1')
     @include('components.sperator')
 @endsection

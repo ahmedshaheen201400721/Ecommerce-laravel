@@ -1,7 +1,9 @@
 @extends('layouts.main')
 
 @section('content1')
-    @include('components.navbar')
+    {{menu('header','components.navbar')}}
+
+    {{--    @include('components.navbar')--}}
     @include('components.header')
 @endsection
 

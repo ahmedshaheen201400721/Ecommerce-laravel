@@ -1,5 +1,6 @@
 @extends('layouts.products')
-@include('components.nav')
+{{--@include('components.nav')--}}
+{{menu('header','components.nav')}}
 @section('content1')
     <div class="p-4 bg-gray-200 text-gray-900 ">
         Home

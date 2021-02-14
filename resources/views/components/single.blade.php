@@ -1,6 +1,29 @@
 <div class="flex w-3/4 mx-auto mt-12">
     <div class="w-1/2">
-        <img class="" src="{{image($product->slug)}}" alt="">
+        <img class="" src="{{asset($product->image)}}" alt="" id="big">
+        <div class="flex flex-wrap mt-6" >
+        @isset($product->images)
+                <?php $images= array_merge([$product->image],json_decode($product->images,true))?>
+
+            @foreach($images as $image)
+                        <img src="{{asset($image)}}" alt="" class="w-1/4 h-full cursor-pointer m-4 border-red-500 tobeselected ">
+                @endforeach
+            @endisset
+                <script>
+                    var big=document.getElementById('big')
+                    var images=Array.from(document.querySelectorAll('.tobeselected'))
+                    images[0].classList.add('chosen')
+                    images.forEach(function(el){
+                        el.addEventListener('mouseover',function(e){
+                            big.src=el.src
+                            images.forEach(function(ele){
+                                ele.classList.remove('chosen')
+                            })
+                            el.classList.add('chosen')
+                        })
+                    })
+                </script>
+        </div>
     </div>
 
     <div class="w-1/2 ml-8 ">
