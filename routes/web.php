@@ -47,9 +47,9 @@ Route::get('/empty',function (){
 });
 
 Route::get('/search',function (){
+    dd(\Gloudemans\Shoppingcart\Facades\Cart::content());
     return view('pages.search');
 });
-
 
 
 Route::get('/thanks', function () {

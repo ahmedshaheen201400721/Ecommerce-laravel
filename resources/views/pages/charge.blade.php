@@ -25,10 +25,10 @@
                         </div>
 
                         <!-- Used to display Element errors. -->
-                        <div id="card-errors" role="alert"></div>
+                        <div id="card-errors" class="text-red-500" role="alert"></div>
                     </div>
 
-                    <button id="card-button" class="px-4 py-2 shadow hover:shadow-xl inline-block rounded text-white bg-gray-800">Submit Payment</button>
+                    <button id="card-button" class="px-4 py-2 shadow hover:shadow-xl inline-block rounded text-white bg-gray-800 disabled:bg-green-400"  >Submit Payment</button>
                 </form>
             </div>
             <div class="w-1/2">
@@ -122,6 +122,7 @@
 
             form.addEventListener('submit', async function(event) {
                 event.preventDefault()
+                document.querySelector('#card-button').setAttribute('disabled','true');
                 const { paymentMethod, error } = await stripe.createPaymentMethod(
                     'card', card, {
                         billing_details: { name: cardHolderName.value }

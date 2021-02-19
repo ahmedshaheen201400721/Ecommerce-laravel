@@ -1,5 +1,5 @@
 @extends('layouts.products')
-@include('components.nav')
+{{menu('header','components.nav')}}
 @section('content1')
 <div class="h-screen flex justify-center items-center">
     <div class="text-black text-center">

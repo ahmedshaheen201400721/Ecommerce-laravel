@@ -22,8 +22,6 @@ class CreateProductsTable extends Migration
             $table->text('description');
             $table->boolean('featured')->default(0);
             $table->string('image')->nullable();
-
-//            $table->foreignId('category_id')->references('id')->on('categories')->onUpdate('cascade');
             $table->timestamps();
         });
     }
