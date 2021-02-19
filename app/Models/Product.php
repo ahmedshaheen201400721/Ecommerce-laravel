@@ -6,10 +6,10 @@ use App\support\filters\ProductFilter;
 use App\support\filters\QueryFilter;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-
+use Laravel\Scout\Searchable;
 class Product extends Model
 {
-    use HasFactory;
+    use HasFactory,Searchable;
 
     public function pricing(){
         return "$".$this->price/100;
@@ -20,10 +20,19 @@ class Product extends Model
     }
     public function categories()
     {
-        return $this->belongsToMany(Category::class)->withTimestamps();
+        return $this->belongsToMany(Category::class,'category_product')->withTimestamps();
     }
     public function scopefilters($query,QueryFilter $filter){
           return  $filter->apply($query);
     }
+
+    public function toSearchableArray()
+    {
+        $array = $this->toArray();
+        $categories=['categories'=>$this->categories->pluck('name')];
+        $array=array_merge($array,$categories);
+        return $array;
+    }
+
 
 }

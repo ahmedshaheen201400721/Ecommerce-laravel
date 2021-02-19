@@ -46,6 +46,10 @@ Route::get('/empty',function (){
     return \Gloudemans\Shoppingcart\Facades\Cart::content();
 });
 
+Route::get('/search',function (){
+    return view('pages.search');
+});
+
 
 
 Route::get('/thanks', function () {

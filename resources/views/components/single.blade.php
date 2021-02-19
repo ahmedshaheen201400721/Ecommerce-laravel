@@ -1,12 +1,12 @@
 <div class="flex w-3/4 mx-auto mt-12">
     <div class="w-1/2">
-        <img class="" src="{{asset($product->image)}}" alt="" id="big">
+        <img class="w-full h-60 object-cover" src="{{asset($product->image)}}" alt="" id="big">
         <div class="flex flex-wrap mt-6" >
         @isset($product->images)
                 <?php $images= array_merge([$product->image],json_decode($product->images,true))?>
 
             @foreach($images as $image)
-                        <img src="{{asset($image)}}" alt="" class="w-1/4 h-full cursor-pointer m-4 border-red-500 tobeselected ">
+                        <img src="{{asset($image)}}" alt="" class="w-1/4  h-full cursor-pointer m-4 border-red-500 tobeselected ">
                 @endforeach
             @endisset
                 <script>
