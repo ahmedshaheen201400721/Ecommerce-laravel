@@ -7,6 +7,7 @@
                 <li><a href="{{ route('login') }}">log In</a></li>
                 <li><a href="{{ route('register') }}">register</a></li>
             @else
+                <li><a href="{{route('profile.show')}}" class=""> My Profile</a></li>
                 <li>
                     <form method="POST" action="{{ route('logout') }}" class="bg-transparent inline">
                         @csrf

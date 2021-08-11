@@ -18,6 +18,7 @@
             <div class="w-3/12">
                 <div class="font-bold ">{{$product->name}}</div>
                 <div class="text-gray-600">{{$product->model->details}}</div>
+                <div class="text-gray-900 text-lg">quantity available <strong>{{$product->model->quantity}} items</strong></div>
             </div>
             <div class="w-2/12">
                 <form action="">

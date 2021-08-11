@@ -30,7 +30,18 @@ class productController extends Controller
 
     {
         $products=Product::where('slug','!=',$product->slug)->inRandomOrder()->take(4)->get();
-        return view('pages.single',['product'=>$product,'products'=>$products]);
+        $stock=$this->get_qty($product->quantity);
+        return view('pages.single',['product'=>$product,'products'=>$products,'stock'=>$stock]);
+    }
+
+    protected function get_qty($qty){
+        if($qty>setting('admin.qty')){
+            return '<span class="bg-green-600 font-bold rounded-full p-1 text-white">high stock</span>';
+        }elseif ($qty<setting('admin.qty') and $qty>0){
+            return '<span class="bg-yellow-600 font-bold rounded-full p-1 text-white">low stock</span>';
+        }else{
+            return '<span class="bg-red-600 font-bold rounded-full p-1 text-white">unavailable</span>';
+        }
     }
 
     /**

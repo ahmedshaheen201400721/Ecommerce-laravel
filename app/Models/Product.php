@@ -9,7 +9,10 @@ use Illuminate\Database\Eloquent\Model;
 use Laravel\Scout\Searchable;
 class Product extends Model
 {
-    use HasFactory,Searchable;
+    use HasFactory;
+    // use HasFactory,Searchable;
+
+    protected $guarded=[];
 
     public function pricing(){
         return "$".$this->price/100;

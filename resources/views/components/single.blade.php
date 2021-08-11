@@ -4,7 +4,6 @@
         <div class="flex flex-wrap mt-6" >
         @isset($product->images)
                 <?php $images= array_merge([$product->image],json_decode($product->images,true))?>
-
             @foreach($images as $image)
                         <img src="{{asset($image)}}" alt="" class="w-1/4  h-full cursor-pointer m-4 border-red-500 tobeselected ">
                 @endforeach
@@ -29,7 +28,8 @@
     <div class="w-1/2 ml-8 ">
         <div class="text-3xl font-bold mb-2">{{$product->name}}</div>
         <div class="text-gray-600 mb-2">{{$product->details}}</div>
-        <div class="text-3xl font-bold mb-6">{{$product->pricing()}}</div>
+        <span class="text-gray-600  font-bold mb-2">stock: </span>{!! $stock !!}
+        <div class="text-3xl font-bold mb-6 my-2">{{$product->pricing()}}</div>
         <div>{{$product->description}}</div>
         <div>
             <form action="{{route('cart.store')}}" method="post" class="inline cursor-pointer">

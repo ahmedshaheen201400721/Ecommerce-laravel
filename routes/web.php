@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 //\Illuminate\Support\Facades\Auth::loginUsingId(1);
-
+//main
 Route::get('/',[\App\Http\Controllers\productController::class,'index'])->name('main');
 
 
@@ -26,6 +26,7 @@ Route::get('/cart', [\App\Http\Controllers\cartController::class,'index'])->name
 Route::post('/cart', [\App\Http\Controllers\cartController::class,'store'])->name('cart.store');
 Route::patch('/cart', [\App\Http\Controllers\cartController::class,'update'])->name('cart.update');
 Route::delete('/cart/{id}', [\App\Http\Controllers\cartController::class,'destroy'])->name('cart.destroy');
+
 Route::post('saved/cart/{id}', [\App\Http\Controllers\cartController::class,'switchToSaved'])->name('cart.switch');
 Route::post('back/cart/{id}', [\App\Http\Controllers\cartController::class,'back'])->name('cart.back');
 Route::delete('back/cart/{id}', [\App\Http\Controllers\cartController::class,'destroySaved'])->name('cart.destroySaved');
@@ -38,6 +39,10 @@ Route::post('/charage', [\App\Http\Controllers\charageController::class,'store']
 Route::delete('/coupon', [\App\Http\Controllers\couponController::class,'destroy'])->name('coupon.destroy');
 Route::post('/coupon', [\App\Http\Controllers\couponController::class,'store'])->name('coupon.store');
 
+Route::name('profile.')->middleware('auth')->prefix('profile')->group(function (){
+    Route::get('/show',[\App\Http\Controllers\UserController::class,'show'])->name('show');
+    Route::patch('/edit',[\App\Http\Controllers\UserController::class,'edit'])->name('edit');
+});
 
 Route::get('/empty',function (){
     \Gloudemans\Shoppingcart\Facades\Cart::destroy();
@@ -47,7 +52,6 @@ Route::get('/empty',function (){
 });
 
 Route::get('/search',function (){
-    dd(\Gloudemans\Shoppingcart\Facades\Cart::content());
     return view('pages.search');
 });
 
@@ -55,6 +59,7 @@ Route::get('/search',function (){
 Route::get('/thanks', function () {
     return view('pages.thank');
 })->name('thanks');
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');

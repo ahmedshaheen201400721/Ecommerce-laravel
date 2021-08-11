@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\chargeRequest;
 use App\Models\Coupon;
 use App\Models\Order;
+use App\Models\Product;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Http\Request;
 
@@ -39,6 +40,7 @@ class charageController extends Controller
                 total($invoice['total']), $request->paymentMethodId
             );
              $this->creatOrder();
+            $this->updateProduct();
             isset($stripeCharge)?Cart::destroy():'';
             Coupon::where('code',session('code'))->delete();
             session()->forget(['code','discount','subtotal']);
@@ -50,7 +52,7 @@ class charageController extends Controller
 
     }
 
-   private function invoice()
+    private function invoice()
     {
         if(session()->has('subtotal')){
 //            dd(session()->all());
@@ -67,20 +69,24 @@ class charageController extends Controller
         }
 
     }
+
     protected function creatOrder(){
         $invoice= $this->invoice();
 
         $products=Cart::content()->map(function($v,$k){return [ 'qty'=>$v->qty,'product_id'=>$v->id] ;});
 
-        $order=Order::create([
+        Order::create([
             'user_id'=>auth()->id(),
             'billing_total'=>$invoice['total'],
             'billing_subtotal'=>$invoice['subtotal'],
             'billing_tax'=>$invoice['tax'],
             'products'=>$products,
         ]);
+    }
 
-        return $order;
-
+    protected function updateProduct(){
+        foreach (Cart::content() as $product){
+            Product::find($product->model->id)->update(['quantity'=>$product->model->quantity-$product->qty]);
+        }
     }
 }
