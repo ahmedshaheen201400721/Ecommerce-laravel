@@ -60,9 +60,7 @@ Route::get('/thanks', function () {
     return view('pages.thank');
 })->name('thanks');
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
+Route::redirect('/dashboard', "/")->name('dashboard');
 
 
 

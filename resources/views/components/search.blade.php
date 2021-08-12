@@ -67,7 +67,7 @@
 <script src="https://cdn.jsdelivr.net/autocomplete.js/0/autocomplete.min.js"></script>
 
 <script >
-    const client = algoliasearch('6VF1YVHEPP', 'f74a239757b94a2d8352a10fa3eb0055');
+    const client = algoliasearch('YOPIXWUSEJ', '0b8c9b5f3f6ee20fbef5c13def1402d0');
     var pressEnter=false
     const index = client.initIndex('products');
 
@@ -92,7 +92,7 @@
                                                     <span>$${(suggestion.price/100).toFixed(2)}</span>
                                     </div>
                                       <div class='flex justify-between'>
-                                                      <img src="http://ecommerce.test/${suggestion.image}" class="w-12 h-8">
+                                                      <img src="http://localhost:8000/${suggestion.image}" class="w-12 h-8">
                                                     <span>${suggestion.details}</span>
                                     </div>
 `;
