@@ -13,3 +13,5 @@ coupons:  abc  or def
 - you can add product to cart
 - you can pay for the product using credit card
 - you can have coupons for discount
+- you can add/remove product to product cart or saveForLater cart
+- it calculate the tax for you
