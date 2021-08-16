@@ -14,10 +14,12 @@
                 </form>
             </li>
         @endguest
+
         @foreach($items as $menu_item)
             @if($menu_item->title=='card')
                 <li>
-                    <a href="{{ $menu_item->link() }}">{{ $menu_item->title }}</a>
+                    {{-- <a href="{{ $menu_item->link() }}">{{ $menu_item->title }}</a> --}}
+                    <a href="{{ route("cart.index") }}">{{ $menu_item->title }}</a>
                     <p class="bg-yellow-300 w-6 h-6 inline-block text-center  rounded-full">{{\Gloudemans\Shoppingcart\Facades\Cart::instance('default')->count()}}</p>
 
                 </li>

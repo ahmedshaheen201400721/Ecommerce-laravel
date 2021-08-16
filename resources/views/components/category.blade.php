@@ -9,9 +9,15 @@
         </div>
         <div>
             <div class="text-lg font-extrabold"> By price</div>
-            <div>0-700$</div>
-            <div>700$-2500$</div>
-            <div>2500&+</div>
+            <a class=" hover:underline" href="{{route('shop.index',['category'=>$name,'price1'])}}">
+                <div >0-700$</div>
+            </a>
+            <a class=" hover:underline" href="{{route('shop.index',['category'=>$name,'price2'])}}">
+                <div>700$-2500$</div>
+            </a>
+            <a class=" hover:underline" href="{{route('shop.index',['category'=>$name,'price3'])}}">
+                <div>2500&+</div>
+            </a>
         </div>
     </div>
 

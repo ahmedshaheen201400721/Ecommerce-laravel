@@ -16,4 +16,19 @@ class ProductFilter extends QueryFilter
     public function order($by='asc'){
         $this->builder->orderBy('price',$by);
     }
+
+    public function price1(){
+      
+        $this->builder->where('price',"<","70000");
+    }
+     
+    public function price2(){
+      
+        $this->builder->where('price',">","70000")->where('price',"<","250000");
+    }
+     
+    public function price3(){
+      
+        $this->builder->where('price',">","250000");
+    }
 }

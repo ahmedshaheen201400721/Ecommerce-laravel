@@ -17,7 +17,6 @@
     <div class="w-1/4">
         <ul>
             <li><a href="{{route('profile.show')}}" class="text-xl hover:underline pb-2 text-blue-500 block"> My Profile</a></li>
-            <li><a href="" class="text-xl hover:underline py-2 text-blue-500 block"> My Orders</a></li>
         </ul>
     </div>
 

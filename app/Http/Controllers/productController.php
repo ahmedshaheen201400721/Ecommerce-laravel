@@ -53,15 +53,12 @@ class productController extends Controller
     public function shop(ProductFilter $filter)
     {
         $categories=Category::get();
-        if(\request()->has('category') or \request()->has('order')){
-            $products=Product::filters($filter)->paginate(9);
-            $products->withPath(route('shop.index',['category'=>\request()->category,'order'=>\request()->order]));
-            return view('pages.shop',['products'=>$products,'categories'=>$categories,'name'=>\request()->category]);
-        }
-        else{
-            $products=Product::inRandomOrder()->paginate(9);
-            return view('pages.shop',['products'=>$products,'categories'=>$categories]);
-        }
+       
+        $products=Product::filters($filter)->inRandomOrder()->paginate(9);
+        $products->withPath(request()->getUri());
+        return view('pages.shop',['products'=>$products,'categories'=>$categories,'name'=>\request()->category]);
+
+
 
     }
 
