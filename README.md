@@ -1,6 +1,6 @@
 #ecomerce website with admin Dashboard
 
-## Demo at  https://myecomercewebsite.ddns.net/
+## Demo at  https://ecomercewebsite.ddns.net/
 - login in with 
 Email: a@a.com
 password: password
